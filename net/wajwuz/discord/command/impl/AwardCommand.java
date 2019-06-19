@@ -21,8 +21,6 @@ public class AwardCommand implements Command {
     @Override
     public void execute(MessageReceivedEvent event, String... args) {
 
-        User.createUser(event.getMember());
-
         EmbedBuilder offlinePlayer = new EmbedBuilder();
         offlinePlayer.setDescription(":interrobang: Blad: Ten gracz jest offline!");
         offlinePlayer.setFooter("\uD83C\uDF89 " + event.getAuthor().getName() + " uzyl tej komendy!", null);
@@ -45,8 +43,22 @@ public class AwardCommand implements Command {
 
         if (args.length == 1) {
             event.getChannel().sendMessage(neededArgument.build()).queue();
+            if(!User.checkUser(event.getMember())) {
+                try {
+                    User.createUser(event.getMember());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         } else {
             Player player = Bukkit.getPlayer(args[1]);
+            if(!User.checkUser(event.getMember())) {
+                try {
+                    User.createUser(event.getMember());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             if(User.getAwardStatus(event.getMember())) {
                 if (player == null) {
                     event.getChannel().sendMessage(offlinePlayer.build()).queue();

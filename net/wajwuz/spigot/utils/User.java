@@ -26,4 +26,8 @@ public class User {
             plugin.saveConfig();
         }
     }
+
+    public static boolean checkUser(Member member) {
+        return plugin.getConfig().contains("users." + member.getUser().getId());
+    }
 }

@@ -3,6 +3,6 @@ bot:
   prefix: "!" # Prefix uzywany do komendy
   game: "twoja nazwa gry" # Status gry
   award:
-    command: "/say {NICK}" # Komenda ktore sie wykonuje gdy gracz odbierze nagrode
+    command: "say {NICK}" # Komenda ktore sie wykonuje gdy gracz odbierze nagrode
 
 users: # Lista uzytkownikow
