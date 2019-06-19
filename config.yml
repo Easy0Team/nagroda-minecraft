@@ -1,8 +1,8 @@
 bot:
-  token: "123123" # Token ktory loguje sie na konto bota.
+  token: "twoj token bota" # Token ktory loguje sie na konto bota.
   prefix: "!" # Prefix uzywany do komendy
-  game: "dellix to muj mis <3" # Status gry
+  game: "twoja nazwa gry" # Status gry
   award:
-    command: "/flara {NICK} 2" # Komenda ktore sie wykonuje gdy gracz odbierze nagrode
+    command: "/say {NICK}" # Komenda ktore sie wykonuje gdy gracz odbierze nagrode
 
 users: # Lista uzytkownikow

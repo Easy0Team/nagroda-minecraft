@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CommandInfo {
+public class CommandBase {
 
     private final String name;
     private final List<String> aliases;
 
-    public CommandInfo(String name) {
+    public CommandBase(String name) {
         this.name = name;
         this.aliases = new ArrayList<>();
     }
 
-    public CommandInfo(String name, String... aliases) {
+    public CommandBase(String name, String... aliases) {
         this.name = name;
         this.aliases = Arrays.asList(aliases);
     }

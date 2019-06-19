@@ -4,7 +4,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public interface Command {
 
-    CommandInfo getInfo();
+    CommandBase getInfo();
 
     void execute(MessageReceivedEvent event, String... args);
 }

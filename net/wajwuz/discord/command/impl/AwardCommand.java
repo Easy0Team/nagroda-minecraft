@@ -3,24 +3,26 @@ package net.wajwuz.discord.command.impl;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.wajwuz.discord.command.Command;
-import net.wajwuz.discord.command.CommandInfo;
+import net.wajwuz.discord.command.CommandBase;
 import net.wajwuz.spigot.config.Config;
-import net.wajwuz.spigot.objects.User;
+import net.wajwuz.spigot.utils.User;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.Color;
 
 public class AwardCommand implements Command {
 
     @Override
-    public CommandInfo getInfo() {
-        return new CommandInfo("nagroda");
+    public CommandBase getInfo() {
+        return new CommandBase("nagroda");
     }
 
     @Override
     public void execute(MessageReceivedEvent event, String... args) {
+
+        User.createUser(event.getMember());
+
         EmbedBuilder offlinePlayer = new EmbedBuilder();
         offlinePlayer.setDescription(":interrobang: Blad: Ten gracz jest offline!");
         offlinePlayer.setFooter("\uD83C\uDF89 " + event.getAuthor().getName() + " uzyl tej komendy!", null);
