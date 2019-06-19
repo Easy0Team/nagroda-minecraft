@@ -41,34 +41,43 @@ public class AwardCommand implements Command {
         awardedBefore.setFooter("\uD83C\uDF89 " + event.getAuthor().getName() + " uzyl tej komendy!", null);
         awardedBefore.setColor(Color.red);
 
-        if (args.length == 1) {
-            event.getChannel().sendMessage(neededArgument.build()).queue();
-            if(!User.checkUser(event.getMember())) {
-                try {
-                    User.createUser(event.getMember());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+        EmbedBuilder wrongChannel = new EmbedBuilder();
+        wrongChannel.setDescription(":interrobang: Nagrode mozesz odebrac na kanale <#" + Config.BOT$AWARD$CHANNEL + ">");
+        wrongChannel.setFooter("\uD83C\uDF89 " + event.getAuthor().getName() + " uzyl tej komendy!", null);
+        wrongChannel.setColor(Color.red);
+
+        if (!event.getChannel().getId().equals(Config.BOT$AWARD$CHANNEL)) {
+            event.getChannel().sendMessage(wrongChannel.build()).queue();
         } else {
-            Player player = Bukkit.getPlayer(args[1]);
-            if(!User.checkUser(event.getMember())) {
-                try {
-                    User.createUser(event.getMember());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            if(User.getAwardStatus(event.getMember())) {
-                if (player == null) {
-                    event.getChannel().sendMessage(offlinePlayer.build()).queue();
-                } else {
-                    event.getChannel().sendMessage(awardedPlayer.build()).queue();
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Config.BOT$AWARD$COMMAND.replace("{NICK}", player.getName()));
-                    User.setAwardStatus(event.getMember(), !User.getAwardStatus(event.getMember()));
+            if (args.length == 1) {
+                event.getChannel().sendMessage(neededArgument.build()).queue();
+                if (!User.checkUser(event.getMember())) {
+                    try {
+                        User.createUser(event.getMember());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             } else {
-                event.getChannel().sendMessage(awardedBefore.build()).queue();
+                Player player = Bukkit.getPlayer(args[1]);
+                if (!User.checkUser(event.getMember())) {
+                    try {
+                        User.createUser(event.getMember());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (User.getAwardStatus(event.getMember())) {
+                    if (player == null) {
+                        event.getChannel().sendMessage(offlinePlayer.build()).queue();
+                    } else {
+                        event.getChannel().sendMessage(awardedPlayer.build()).queue();
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Config.BOT$AWARD$COMMAND.replace("{NICK}", player.getName()));
+                        User.setAwardStatus(event.getMember(), !User.getAwardStatus(event.getMember()));
+                    }
+                } else {
+                    event.getChannel().sendMessage(awardedBefore.build()).queue();
+                }
             }
         }
     }

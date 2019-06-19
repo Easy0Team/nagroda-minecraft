@@ -4,5 +4,6 @@ bot:
   game: "twoja nazwa gry" # Status gry
   award:
     command: "say {NICK}" # Komenda ktore sie wykonuje gdy gracz odbierze nagrode
+    channel: "590790980559437825" # ID kanalu na ktorym mozna wziasc nagrode.
 
 users: # Lista uzytkownikow
