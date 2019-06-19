@@ -1,6 +1,6 @@
-package net.wajwuz.spigot.main;
+package net.wajwuz.spigot.basic;
 
-import net.wajwuz.discord.main.DiscordBot;
+import net.wajwuz.discord.basic.DiscordBot;
 import net.wajwuz.spigot.config.Config;
 import org.bukkit.plugin.java.JavaPlugin;
 

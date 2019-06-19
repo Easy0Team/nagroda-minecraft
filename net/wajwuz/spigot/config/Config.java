@@ -1,6 +1,6 @@
 package net.wajwuz.spigot.config;
 
-import net.wajwuz.spigot.main.DiscordPlugin;
+import net.wajwuz.spigot.basic.DiscordPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class Config {

@@ -1,4 +1,4 @@
 name: discordPlugin
 version: 1.0-SNAPSHOT
 author: wajwuz <o/#1337
-main: net.wajwuz.spigot.main.DiscordPlugin
+main: net.wajwuz.spigot.basic.DiscordPlugin

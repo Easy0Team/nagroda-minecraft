@@ -3,7 +3,7 @@ package net.wajwuz.discord.listeners;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import net.wajwuz.discord.command.Command;
-import net.wajwuz.discord.main.DiscordBot;
+import net.wajwuz.discord.basic.DiscordBot;
 import net.wajwuz.spigot.config.Config;
 
 import java.util.concurrent.TimeUnit;

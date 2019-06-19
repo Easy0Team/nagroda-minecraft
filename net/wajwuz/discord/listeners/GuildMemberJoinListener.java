@@ -1,15 +1,12 @@
 package net.wajwuz.discord.listeners;
 
-import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import net.wajwuz.discord.main.DiscordBot;
-import net.wajwuz.spigot.main.DiscordPlugin;
-import org.bukkit.plugin.Plugin;
+import net.wajwuz.discord.basic.DiscordBot;
+import net.wajwuz.spigot.utils.User;
 
 public class GuildMemberJoinListener extends ListenerAdapter {
 
-    private final Plugin plugin = DiscordPlugin.getPlugin(DiscordPlugin.class);
 
     private final DiscordBot bot;
 
@@ -20,11 +17,12 @@ public class GuildMemberJoinListener extends ListenerAdapter {
 
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
-        final Member member = event.getMember();
-        if(!plugin.getConfig().contains("users." + member.getUser().getId())) {
-            plugin.getConfig().set("users." + member.getUser().getId() + ".award", true);
-            plugin.getConfig().set("users." + member.getUser().getId() + ".name", member.getUser().getName());
-            plugin.saveConfig();
+        if(!User.checkUser(event.getMember())) {
+            try {
+                User.createUser(event.getMember());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 package net.wajwuz.spigot.utils;
 
 import net.dv8tion.jda.core.entities.Member;
-import net.wajwuz.spigot.main.DiscordPlugin;
+import net.wajwuz.spigot.basic.DiscordPlugin;
 import org.bukkit.plugin.Plugin;
 
 public class User {

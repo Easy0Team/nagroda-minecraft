@@ -1,4 +1,4 @@
-package net.wajwuz.discord.main;
+package net.wajwuz.discord.basic;
 
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
