@@ -17,7 +17,7 @@ public class GuildMemberJoinListener extends ListenerAdapter {
 
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
-        if(!User.checkUser(event.getMember())) {
+        if(!User.getUser(event.getMember())) {
             try {
                 User.createUser(event.getMember());
             } catch (Exception e) {

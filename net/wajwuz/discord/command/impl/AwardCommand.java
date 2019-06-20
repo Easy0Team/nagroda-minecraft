@@ -4,10 +4,14 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.wajwuz.discord.command.Command;
 import net.wajwuz.discord.command.CommandBase;
+import net.wajwuz.spigot.basic.DiscordPlugin;
 import net.wajwuz.spigot.config.Config;
 import net.wajwuz.spigot.utils.User;
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.awt.Color;
 
@@ -51,7 +55,7 @@ public class AwardCommand implements Command {
         } else {
             if (args.length == 1) {
                 event.getChannel().sendMessage(neededArgument.build()).queue();
-                if (!User.checkUser(event.getMember())) {
+                if (!User.getUser(event.getMember())) {
                     try {
                         User.createUser(event.getMember());
                     } catch (Exception e) {
@@ -60,7 +64,7 @@ public class AwardCommand implements Command {
                 }
             } else {
                 Player player = Bukkit.getPlayer(args[1]);
-                if (!User.checkUser(event.getMember())) {
+                if (!User.getUser(event.getMember())) {
                     try {
                         User.createUser(event.getMember());
                     } catch (Exception e) {
@@ -72,8 +76,15 @@ public class AwardCommand implements Command {
                         event.getChannel().sendMessage(offlinePlayer.build()).queue();
                     } else {
                         event.getChannel().sendMessage(awardedPlayer.build()).queue();
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Config.BOT$AWARD$COMMAND.replace("{NICK}", player.getName()));
                         User.setAwardStatus(event.getMember(), !User.getAwardStatus(event.getMember()));
+                        synchronized (this) {
+                            new BukkitRunnable() {
+                                @Override
+                                public void run() {
+                                    Bukkit.getServer().dispatchCommand(DiscordPlugin.getPlugin(DiscordPlugin.class).getServer().getConsoleSender(), Config.BOT$AWARD$COMMAND.replace("{NICK}", player.getName()));
+                                }
+                            }.runTaskLater(DiscordPlugin.getPlugin(DiscordPlugin.class), 1L);
+                        }
                     }
                 } else {
                     event.getChannel().sendMessage(awardedBefore.build()).queue();

@@ -12,10 +12,7 @@ public class User {
     }
 
     public static void setAwardStatus(Member member, boolean b) {
-        getAwardStatus(member);
-        boolean status;
-        status = b;
-        plugin.getConfig().set("users." + member.getUser().getId() + ".award", status);
+        plugin.getConfig().set("users." + member.getUser().getId() + ".award", b);
         plugin.saveConfig();
     }
 
@@ -27,7 +24,7 @@ public class User {
         }
     }
 
-    public static boolean checkUser(Member member) {
+    public static boolean getUser(Member member) {
         return plugin.getConfig().contains("users." + member.getUser().getId());
     }
 }
