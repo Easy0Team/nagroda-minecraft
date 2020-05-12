@@ -21,6 +21,7 @@ public class MessageReceivedListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(final @NotNull MessageReceivedEvent event) {
         if (!User.getUser(event.getMember())) User.createUser(event.getMember());
+        if (event.getChannel().getId().equals(Config.BOT$AWARD$CHANNEL)) event.getMessage().delete().queueAfter(1L, TimeUnit.SECONDS);
         try {
             final String[] args = event.getMessage().getContentDisplay().split(" ");
             if (!args[0].startsWith(Config.BOT$PREFIX)) return;
