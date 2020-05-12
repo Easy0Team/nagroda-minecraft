@@ -1,20 +1,19 @@
-package net.wajwuz.discord.command;
+package net.wajwuz.rewards.commands;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class CommandBase {
-
     private final String name;
     private final List<String> aliases;
 
-    public CommandBase(String name) {
+    public CommandBase(final String name) {
         this.name = name;
         this.aliases = new ArrayList<>();
     }
 
-    public CommandBase(String name, String... aliases) {
+    public CommandBase(final String name, final String... aliases) {
         this.name = name;
         this.aliases = Arrays.asList(aliases);
     }

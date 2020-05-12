@@ -1,4 +1,6 @@
-name: discordPlugin
+name: RewardPlugin
+main: net.wajwuz.rewards.basic.impl.RewardPlugin
 version: 1.0-SNAPSHOT
-author: wajwuz <o/#1337
-main: net.wajwuz.spigot.basic.DiscordPlugin
+author: wajwuz known as michalmeister#7777
+website: http://wajwuz.club
+description: A simple discord reward plugin

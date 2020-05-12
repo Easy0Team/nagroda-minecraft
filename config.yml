@@ -1,9 +1,15 @@
 bot:
-  token: "twoj token bota" # Token ktory loguje sie na konto bota.
-  prefix: "!" # Prefix uzywany do komendy
-  game: "twoja nazwa gry" # Status gry
+  token: "NzA1MzM2OTUxOTgwNDI1MjM2.Xrpo8g.cwBUUmXP5j2X1iM-Udz1zMwNiJw" # Token możesz zdobyć ze strony https://discord.com/developers/applications/
+  prefix: "/" # Jest to wpisywane przed słowem "nagroda" czyli "!nagroda"
+  game: "rewards!" # Tutaj będzie wyświetlana twoja własna informacja na statusie bota
   award:
-    command: "say {NICK}" # Komenda ktore sie wykonuje gdy gracz odbierze nagrode
-    channel: "590790980559437825" # ID kanalu na ktorym mozna wziasc nagrode.
+    command: "say {NICK}" # Jeżeli gracz odbierze nagrode wykonuje sie tutaj ustalona komenda
+    channel: "590790980559437825" # Tylko na tym kanale można odbierać nagrode
+  messages:
+    offline: ":interrobang: Ten gracz nie jest na serwerze!"
+    awarded: ":tada: Nagrode nadam w ciągu parunastu sekund :)"
+    empty: ":interrobang: Nie podałeś swojego nicku, nie jestem jasnowidziem :D"
+    received: ":interrobang: Niestety ale odebrałeś już swoją nagrode."
+    channel: ":interrobang: Na tym kanale nie odbieramy nagrody, musisz to napisać na {CHANNEL}."
 
-users: # Lista uzytkownikow
+users: # Lista osób które odebrały nagrode
