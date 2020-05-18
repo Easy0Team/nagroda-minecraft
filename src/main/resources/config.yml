@@ -1,0 +1,45 @@
+bot:
+  token: "NzA1MzM2OTUxOTgwNDI1MjM2.Xrpo8g.cwBUUmXP5j2X1iM-Udz1zMwNiJw" # Token możesz zdobyć ze strony https://discord.com/developers/applications/
+  prefix: "!" # Jest to wpisywane przed słowem "nagroda" czyli "!nagroda"
+  game:
+    type: LISTENING # czynnosc wykonywana na statusie bota
+    message: "rewards!" # Tutaj będzie wyświetlana twoja własna informacja na statusie bota
+  award:
+    command: "say {NICK}" # Jeżeli gracz odbierze nagrode wykonuje sie tutaj ustalona komenda
+    channel: "590790980559437825" # Tylko na tym kanale można odbierać nagrode
+  messages:
+    offline: # Skonfigurowany embed z wszystkimi mozliwosciami
+      url: "http://wajwuz.club"
+      title: "Gracz nie istnieje!"
+      description: ":interrobang: Podany gracz nie znajduje sie na serwerze."
+      embedType: RICH # IMAGE, VIDEO, LINK, RICH
+      color: 16073282
+      thumbnailUrl: "https://i.imgur.com/fmuDfZ4.jpg"
+      footer:
+        text: "eluwa"
+        image: "https://i.imgur.com/fmuDfZ4.jpg"
+      image: "https://i.imgur.com/fmuDfZ4.jpg"
+    awarded:
+      title: "Operacja wykonana pomyslnie!"
+      color: 11022914
+      description: ":tada: Nagrode nadam w ciągu parunastu sekund :)"
+    empty:
+      title: "Blad."
+      color: 16073282
+      description: ":interrobang: Nie podales swojego nicku, nie jestem jasnowidziem :D"
+    received:
+      title: "Blad."
+      color: 16073282
+      description: ":interrobang: Niestety ale odebrales już swoja nagrode."
+
+save:
+  type: FLAT # Metoda zapisywania danych.
+  # FLAT - zapisywanie w pliku (flatdata.yml)
+  # MYSQL - zapisywanie w bazie danych (trzeba podac passy ponizej)
+  credentials: # passy do db
+    url: "jdbc:mysql://127.0.0.1:3306/database" # URL polaczenia z baza danych. Jak nie wiesz co to jest, zmien tylko:
+    # 127.0.0.1 - ip do bazy danych
+    # 3306 - port polaczenia z baza danych
+    # database - nazwa bazy danych.
+    user: "root" # Uzytkownik
+    pass: "" # Haslo do konta uzytkownika
