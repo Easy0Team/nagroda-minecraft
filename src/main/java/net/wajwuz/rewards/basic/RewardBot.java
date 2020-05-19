@@ -12,6 +12,7 @@ import net.wajwuz.rewards.configuration.FlatDataConfiguration;
 import net.wajwuz.rewards.configuration.PluginConfiguration;
 import net.wajwuz.rewards.data.Store;
 import net.wajwuz.rewards.data.impl.FlatStore;
+import net.wajwuz.rewards.data.impl.MySQLStore;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,23 +26,23 @@ public class RewardBot extends ListenerAdapter {
     private Store userData;
     private JDA jda;
 
-    RewardBot(JavaPlugin plugin, PluginConfiguration configuration) {
-        this.pluginConfiguration = configuration;
+    RewardBot(RewardPlugin rewardPlugin) {
+        this.pluginConfiguration = rewardPlugin.getPluginConfiguration();
 
-        if (configuration.saveType.equalsIgnoreCase("flat")) {
-            FlatDataConfiguration dataConfiguration = new FlatDataConfiguration(plugin);
+        if (pluginConfiguration.saveType.equalsIgnoreCase("flat")) {
+            FlatDataConfiguration dataConfiguration = new FlatDataConfiguration(rewardPlugin);
             dataConfiguration.loadConfiguration();
             this.userData = new FlatStore(dataConfiguration);
-        } else if (configuration.saveType.equalsIgnoreCase("mysql")) {
-            this.userData = null;
+        } else if (pluginConfiguration.saveType.equalsIgnoreCase("mysql")) {
+            this.userData = new MySQLStore(rewardPlugin);
         } else {
-            plugin.getLogger().info("Nie znaleziono typu zapisywania danych " + configuration.saveType + ". Wylaczanie pluginu.");
-            plugin.getServer().getPluginManager().disablePlugin(plugin);
+            rewardPlugin.getLogger().info("Nie znaleziono typu zapisywania danych " + pluginConfiguration.saveType + ". Wylaczanie pluginu.");
+            rewardPlugin.getServer().getPluginManager().disablePlugin(rewardPlugin);
             return;
         }
 
         this.userData.loadData();
-        this.commandManager = new CommandManager(configuration, userData);
+        this.commandManager = new CommandManager(pluginConfiguration, userData);
     }
 
     void startBot() {
@@ -80,7 +81,7 @@ public class RewardBot extends ListenerAdapter {
         command.ifPresent(value -> value.execute(event, args));
     }
 
-    public Store getStore() {
+    Store getStore() {
         return userData;
     }
 }

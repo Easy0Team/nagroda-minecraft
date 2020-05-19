@@ -20,6 +20,9 @@ public class PluginConfiguration extends DataConfiguration {
     public MessageEmbed invalidArugmentMessage;
     public MessageEmbed playerAlreadyReceivedMessage;
     public String saveType;
+    public String databaseUrl;
+    public String databaseUser;
+    public String databasePass;
 
     public PluginConfiguration(Plugin plugin) {
         super(plugin, "config.yml");
@@ -35,6 +38,9 @@ public class PluginConfiguration extends DataConfiguration {
         invalidArugmentMessage = getEmbed("bot.messages.empty");
         playerAlreadyReceivedMessage = getEmbed("bot.messages.received");
         saveType = configuration.getString("save.type");
+        databaseUrl = configuration.getString("save.credentials.url");
+        databaseUser = configuration.getString("save.credentials.user");
+        databasePass = configuration.getString("save.credentials.pass");
     }
 
     private MessageEmbed getEmbed(String path) {

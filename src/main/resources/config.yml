@@ -37,7 +37,7 @@ save:
   # FLAT - zapisywanie w pliku (flatdata.yml)
   # MYSQL - zapisywanie w bazie danych (trzeba podac passy ponizej)
   credentials: # passy do db
-    url: "jdbc:mysql://127.0.0.1:3306/database" # URL polaczenia z baza danych. Jak nie wiesz co to jest, zmien tylko:
+    url: "jdbc:mysql://127.0.0.1:3306/database?autoReconnect=true" # URL polaczenia z baza danych. Jak nie wiesz co to jest, zmien tylko:
     # 127.0.0.1 - ip do bazy danych
     # 3306 - port polaczenia z baza danych
     # database - nazwa bazy danych.
