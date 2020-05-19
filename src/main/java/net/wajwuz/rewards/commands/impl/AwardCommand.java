@@ -6,6 +6,7 @@ import net.wajwuz.rewards.commands.Command;
 import net.wajwuz.rewards.configuration.PluginConfiguration;
 import net.wajwuz.rewards.data.Store;
 import net.wajwuz.rewards.data.User;
+import net.wajwuz.rewards.event.PrizeReceiveEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -24,7 +25,7 @@ public class AwardCommand extends Command {
 
     @Override
     public void execute(MessageReceivedEvent event, String... strings) {
-        if (strings.length <= 1) {
+        if (strings.length <= 1 && !configuration.botPrefix.isEmpty()) {
             sendMessage(event.getChannel(), configuration.invalidArugmentMessage);
             return;
         }
@@ -41,7 +42,7 @@ public class AwardCommand extends Command {
             return;
         }
 
-        synchronized (this) { //chyba jak dam to przed, to ten keyword bedzie mial wiekszy sens?
+        synchronized (this) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -52,5 +53,6 @@ public class AwardCommand extends Command {
 
         user.unlockPrize();
         sendMessage(event.getChannel(), configuration.playerAwardedMessage);
+        Bukkit.getPluginManager().callEvent(new PrizeReceiveEvent(player, user));
     }
 }

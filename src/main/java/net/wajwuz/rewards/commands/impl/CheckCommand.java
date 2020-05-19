@@ -21,7 +21,7 @@ public class CheckCommand extends Command {
     @Override
     public void execute(MessageReceivedEvent event, String... strings) {
         if (strings.length != 2 || event.getMember() == null || !event.getMember().hasPermission(Permission.KICK_MEMBERS)) {
-            event.getMessage().addReaction("x").queue();
+            event.getMessage().addReaction("\uD83E\uDD2F").queue();
             return;
         }
 
