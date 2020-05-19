@@ -1,10 +1,13 @@
 package net.wajwuz.rewards.configuration;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class DataConfiguration {
     private File file;
@@ -19,9 +22,9 @@ public class DataConfiguration {
                 plugin.saveResource(fileName, false);
                 return;
             }
-            
-            if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
+
             try {
+                Files.createParentDirs(file);
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -30,12 +33,20 @@ public class DataConfiguration {
     }
 
     public void loadConfiguration() {
-        this.configuration = YamlConfiguration.loadConfiguration(file);
+        try {
+            this.configuration = new YamlConfiguration();
+            this.configuration.load(new InputStreamReader(new FileInputStream(file), Charsets.UTF_8));
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveConfiguration() {
         try {
-            configuration.save(file);
+            Files.createParentDirs(file);
+            try (Writer writer = new OutputStreamWriter(new FileOutputStream(file), Charsets.UTF_8)) {
+                writer.write(configuration.saveToString());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
