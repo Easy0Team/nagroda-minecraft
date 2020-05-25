@@ -1,8 +1,12 @@
 package net.wajwuz.rewards.basic;
 
 import net.wajwuz.rewards.configuration.PluginConfiguration;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.net.URL;
+import java.net.URLClassLoader;
 
 public class RewardPlugin extends JavaPlugin {
     private RewardBot botInstance;
@@ -10,6 +14,8 @@ public class RewardPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        new Metrics(this, 7650);
+
         this.pluginConfiguration = new PluginConfiguration(this);
         this.botInstance = new RewardBot(this);
         this.botInstance.startBot();
