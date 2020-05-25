@@ -20,6 +20,8 @@ public class RewardPlugin extends JavaPlugin {
         this.botInstance = new RewardBot(this);
         this.botInstance.startBot();
 
+        //siusiag
+
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> botInstance.getStore().saveData(), 0L, 20L * 60L * 3L);
     }
 
