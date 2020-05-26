@@ -1,5 +1,6 @@
 package net.wajwuz.rewards.configuration;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.EmbedType;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.bukkit.configuration.ConfigurationSection;
@@ -15,10 +16,10 @@ public class PluginConfiguration extends DataConfiguration {
     public String botGameName;
     public String botAwardCommand;
     public String botAwardChannelId;
-    public MessageEmbed playerOfflineMessage;
-    public MessageEmbed playerAwardedMessage;
-    public MessageEmbed invalidArugmentMessage;
-    public MessageEmbed playerAlreadyReceivedMessage;
+    public EmbedBuilder playerOfflineMessage;
+    public EmbedBuilder playerAwardedMessage;
+    public EmbedBuilder invalidArugmentMessage;
+    public EmbedBuilder playerAlreadyReceivedMessage;
     public String saveType;
     public String databaseUrl;
     public String databaseUser;
@@ -43,29 +44,31 @@ public class PluginConfiguration extends DataConfiguration {
         databasePass = configuration.getString("save.credentials.pass");
     }
 
-    private MessageEmbed getEmbed(String path) {
+    private EmbedBuilder getEmbed(String path) {
         ConfigurationSection embedSection = configuration.getConfigurationSection(path);
         if(embedSection == null) {
             super.plugin.getLogger().warning("Wiadomosc " + path + " nie zostala odnaleziona w configu. ");
             return null;
         }
 
-        return new MessageEmbed(
+        return new EmbedBuilder(new MessageEmbed(
                 embedSection.getString("url"),
                 embedSection.getString("title"),
                 embedSection.getString("description"),
-                EmbedType.fromKey(embedSection.getString("embedType")),
+                EmbedType.RICH,
                 OffsetDateTime.now(),
                 embedSection.getInt("color"),
                 embedSection.getString("thumbnailUrl") == null ? null : new MessageEmbed.Thumbnail(embedSection.getString("thumbnailUrl"), null, 0, 0),
                 null,
                 embedSection.getString("author") == null ? null : new MessageEmbed.AuthorInfo(embedSection.getString("author"), embedSection.getString("author.url"), embedSection.getString("author.icon"), null),
                 null,
-                embedSection.getString("footer") == null ? null : new MessageEmbed.Footer(embedSection.getString("footer.text"), embedSection.getString("footer.image"), null),
+                new MessageEmbed.Footer("invoked by null", null, null),
                 embedSection.getString("image") == null ? null : new MessageEmbed.ImageInfo(embedSection.getString("image"), null, 0, 0),
                 Collections.emptyList()
-        );
+        ));
     }
+
+
 
 
 }

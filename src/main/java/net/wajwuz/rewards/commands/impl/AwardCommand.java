@@ -11,8 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.concurrent.TimeUnit;
-
 public class AwardCommand extends Command {
     private final Store userData;
     private final PluginConfiguration configuration;
@@ -26,19 +24,19 @@ public class AwardCommand extends Command {
     @Override
     public void execute(MessageReceivedEvent event, String... strings) {
         if (strings.length <= 1 && !configuration.botPrefix.isEmpty()) {
-            sendMessage(event.getChannel(), configuration.invalidArugmentMessage);
+            sendMessage(event.getChannel(), event.getAuthor(), configuration.invalidArugmentMessage);
             return;
         }
 
         Player player = Bukkit.getPlayer(strings[1]);
         if (player == null) {
-            sendMessage(event.getChannel(), configuration.playerOfflineMessage);
+            sendMessage(event.getChannel(), event.getAuthor(), configuration.playerOfflineMessage);
             return;
         }
 
         User user = userData.getUser(player.getName(), event.getAuthor().getId());
         if (user.hasUnlockedPrize()) {
-            sendMessage(event.getChannel(), configuration.playerAlreadyReceivedMessage);
+            sendMessage(event.getChannel(), event.getAuthor(), configuration.playerAlreadyReceivedMessage);
             return;
         }
 
@@ -52,7 +50,7 @@ public class AwardCommand extends Command {
         }
 
         user.unlockPrize();
-        sendMessage(event.getChannel(), configuration.playerAwardedMessage);
+        sendMessage(event.getChannel(), event.getAuthor(), configuration.playerAwardedMessage);
         Bukkit.getPluginManager().callEvent(new PrizeReceiveEvent(player, user));
     }
 }

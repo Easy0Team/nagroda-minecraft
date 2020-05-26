@@ -12,12 +12,8 @@ bot:
       url: "http://wajwuz.club"
       title: "Gracz nie istnieje!"
       description: ":interrobang: Podany gracz nie znajduje sie na serwerze."
-      embedType: RICH # IMAGE, VIDEO, LINK, RICH
       color: 16073282
       thumbnailUrl: "https://i.imgur.com/fmuDfZ4.jpg"
-      footer:
-        text: "eluwa"
-        image: "https://i.imgur.com/fmuDfZ4.jpg"
       image: "https://i.imgur.com/fmuDfZ4.jpg"
     awarded:
       title: "Operacja wykonana pomyslnie!"

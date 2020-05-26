@@ -1,7 +1,8 @@
 package net.wajwuz.rewards.commands;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.Arrays;
@@ -23,8 +24,8 @@ public abstract class Command {
 
     public abstract void execute(final MessageReceivedEvent event, final String... strings);
 
-    protected void sendMessage(MessageChannel channel, MessageEmbed embededMessage) {
-        channel.sendMessage(embededMessage)
+    protected void sendMessage(MessageChannel channel, User user, EmbedBuilder embededMessage) {
+        channel.sendMessage(embededMessage.setFooter("Komenda uzyta przez " + user.getName(), user.getAvatarUrl()).build())
                 .queue(message -> message.delete()
                         .queueAfter(5L, TimeUnit.SECONDS));
     }
