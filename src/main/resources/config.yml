@@ -9,12 +9,9 @@ bot:
     channel: "590790980559437825" # Tylko na tym kanale można odbierać nagrode
   messages:
     offline: # Skonfigurowany embed z wszystkimi mozliwosciami
-      url: "http://wajwuz.club"
       title: "Gracz nie istnieje!"
       description: ":interrobang: Podany gracz nie znajduje sie na serwerze."
       color: 16073282
-      thumbnailUrl: "https://i.imgur.com/fmuDfZ4.jpg"
-      image: "https://i.imgur.com/fmuDfZ4.jpg"
     awarded:
       title: "Operacja wykonana pomyslnie!"
       color: 11022914
