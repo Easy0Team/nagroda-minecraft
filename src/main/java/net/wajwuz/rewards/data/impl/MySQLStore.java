@@ -10,12 +10,11 @@ import java.sql.*;
 public class MySQLStore extends Store {
     private static final String DATABASE_DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
-    private final PluginConfiguration pluginConfiguration;
     private Connection databaseConnection;
 
 
     public MySQLStore(RewardPlugin pluginInstance) {
-        this.pluginConfiguration = pluginInstance.getPluginConfiguration();
+        PluginConfiguration pluginConfiguration = pluginInstance.getPluginConfiguration();
 
         try {
             Class.forName(DATABASE_DRIVER_CLASS_NAME).newInstance();

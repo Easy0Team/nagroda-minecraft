@@ -50,6 +50,7 @@ public class AwardCommand extends Command {
         }
 
         user.unlockPrize();
+        Bukkit.broadcastMessage(configuration.botAwardMessage.replace("{NICK}", player.getName()));
         sendMessage(event.getChannel(), event.getAuthor(), configuration.playerAwardedMessage);
         Bukkit.getPluginManager().callEvent(new PrizeReceiveEvent(player, user));
     }

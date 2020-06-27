@@ -26,18 +26,16 @@ public class CheckCommand extends Command {
         }
 
         String identifier = strings[1];
-        if(event.getMessage().getMentionedMembers().size() != 0)
+        if (event.getMessage().getMentionedMembers().size() != 0)
             identifier = event.getMessage().getMentionedMembers().get(0).getId();
 
         Optional<User> user = storeData.getUser(identifier);
-        if(!user.isPresent()) {
+        if (user.isPresent())
+            event.getChannel().sendMessage(new EmbedBuilder().setTitle("Informacje o graczu " + user.get().getMinecraftPlayerName()).setColor(Color.GREEN)
+                    .addField("ID Konta Discorda", user.get().getDiscordUserId() + " (<@" + user.get().getDiscordUserId() + ">)", false)
+                    .addField("Nick w mc", user.get().getMinecraftPlayerName(), false)
+                    .build()).queue();
+        else
             event.getChannel().sendMessage(new EmbedBuilder().setTitle("Blad").setDescription("Gracz nie znajduje sie w bazie danych.").setColor(Color.RED).build()).queue();
-            return;
-        }
-
-        event.getChannel().sendMessage(new EmbedBuilder().setTitle("Informacje o graczu " + user.get().getMinecraftPlayerName()).setColor(Color.GREEN)
-                .addField("ID Konta Discorda", user.get().getDiscordUserId() + " (<@" + user.get().getDiscordUserId() + ">)", false)
-                .addField("Nick w mc", user.get().getMinecraftPlayerName(), false)
-                .build()).queue();
     }
 }

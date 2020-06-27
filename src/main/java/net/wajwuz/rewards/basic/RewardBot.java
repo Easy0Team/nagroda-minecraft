@@ -47,9 +47,8 @@ public class RewardBot extends ListenerAdapter {
 
     void startBot() {
         this.jda = this.createUser(pluginConfiguration.botToken);
-        if (this.jda == null) {
+        if (this.jda == null)
             return;
-        }
         this.jda.addEventListener(this);
     }
 
@@ -69,7 +68,7 @@ public class RewardBot extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(final @NotNull MessageReceivedEvent event) {
-        if (event.getChannel().getId().equals(pluginConfiguration.botAwardChannelId) && !event.getAuthor().isBot())
+        if (pluginConfiguration.botAwardChannels.contains(event.getChannel().getId()) || pluginConfiguration.botAwardChannels.size() == 0 && !event.getAuthor().isBot())
             event.getMessage().delete().queueAfter(1L, TimeUnit.SECONDS);
 
         String messageContent = event.getMessage().getContentRaw();

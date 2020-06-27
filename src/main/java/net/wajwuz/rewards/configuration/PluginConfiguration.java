@@ -3,11 +3,14 @@ package net.wajwuz.rewards.configuration;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.EmbedType;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.Plugin;
 
 import java.time.OffsetDateTime;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PluginConfiguration extends DataConfiguration {
     public String botToken;
@@ -15,7 +18,8 @@ public class PluginConfiguration extends DataConfiguration {
     public String botGameType;
     public String botGameName;
     public String botAwardCommand;
-    public String botAwardChannelId;
+    public String botAwardMessage;
+    public List<String> botAwardChannels;
     public EmbedBuilder playerOfflineMessage;
     public EmbedBuilder playerAwardedMessage;
     public EmbedBuilder invalidArugmentMessage;
@@ -33,7 +37,8 @@ public class PluginConfiguration extends DataConfiguration {
         botGameType = configuration.getString("bot.game.type");
         botGameName = configuration.getString("bot.game.message");
         botAwardCommand = configuration.getString("bot.award.command");
-        botAwardChannelId = configuration.getString("bot.award.channel");
+        botAwardMessage = configuration.getStringList("bot.award.message").stream().map(str -> ChatColor.translateAlternateColorCodes('&', str)).collect(Collectors.joining("\n"));
+        botAwardChannels = configuration.getStringList("bot.award.channels");
         playerOfflineMessage = getEmbed("bot.messages.offline");
         playerAwardedMessage = getEmbed("bot.messages.awarded");
         invalidArugmentMessage = getEmbed("bot.messages.empty");

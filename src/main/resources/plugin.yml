@@ -4,3 +4,5 @@ version: 1.0-SNAPSHOT
 authors: [wajwuz, memehuj]
 website: http://wajwuz.club
 description: A simple discord reward plugin
+softdepend:
+  - PlaceholderAPI

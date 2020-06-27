@@ -6,7 +6,13 @@ bot:
     message: "rewards!" # Tutaj będzie wyświetlana twoja własna informacja na statusie bota
   award:
     command: "say {NICK}" # Jeżeli gracz odbierze nagrode wykonuje sie tutaj ustalona komenda
-    channel: "590790980559437825" # Tylko na tym kanale można odbierać nagrode
+    message:
+      - ""
+      - "&7Gracz &b{NICK} &7odebral nagrode za polaczenie z discordem!"
+      - ""
+    channels: # Kanały na których można odebrać nagrode
+      - "590790980559437825"
+    # Jeżeli chcesz żeby na każdym kanale dało się odebrać nagrode, zamien to na `channels: []`
   messages:
     offline: # Skonfigurowany embed z wszystkimi mozliwosciami
       title: "Gracz nie istnieje!"
