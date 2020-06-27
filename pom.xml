@@ -6,7 +6,7 @@
 
     <groupId>net.wajwuz</groupId>
     <artifactId>nagroda-minecraft</artifactId>
-    <version>1.2-RECODE</version>
+    <version>1.3-RECODE</version>
 
     <properties>
         <java.version>1.8</java.version>

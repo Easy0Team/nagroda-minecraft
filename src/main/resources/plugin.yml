@@ -1,6 +1,6 @@
 name: RewardPlugin
 main: net.wajwuz.rewards.basic.RewardPlugin
-version: 1.0-SNAPSHOT
+version: ${project.version}
 authors: [wajwuz, memehuj]
 website: http://wajwuz.club
 description: A simple discord reward plugin
