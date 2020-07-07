@@ -40,7 +40,7 @@ public class MySQLStore extends Store {
             ResultSet result = stmt.executeQuery("SELECT * FROM `nagroda_minecraft`");
             while (result.next()) {
                 String playerName = result.getString("MinecraftPlayerName");
-                super.userMap.put(playerName, new User(
+                userMap.put(playerName, new User(
                         playerName,
                         result.getString("DiscordUserId"),
                         result.getInt("HasUnlockedPrize") == 1));
@@ -57,8 +57,8 @@ public class MySQLStore extends Store {
         try {
             PreparedStatement updateStatement = databaseConnection.prepareStatement("INSERT INTO `nagroda_minecraft` VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE MinecraftPlayerName=?, HasUnlockedPrize=?");
 
-            for(User user: userMap.values()) {
-                if(!user.needSave()) continue;
+            for (User user : userMap.values()) {
+                if (!user.needSave()) continue;
                 updateStatement.setString(1, user.getMinecraftPlayerName());
                 updateStatement.setString(2, user.getDiscordUserId());
                 updateStatement.setInt(3, user.hasUnlockedPrize() ? 1 : 0);

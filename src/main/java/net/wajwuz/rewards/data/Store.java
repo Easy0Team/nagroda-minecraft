@@ -25,4 +25,5 @@ public abstract class Store {
     public abstract void loadData();
 
     public abstract void saveData();
+
 }

@@ -1,30 +1,35 @@
 package net.wajwuz.rewards.data.impl;
 
-import net.wajwuz.rewards.configuration.FlatDataConfiguration;
 import net.wajwuz.rewards.data.Store;
 import net.wajwuz.rewards.data.User;
-import org.bukkit.configuration.ConfigurationSection;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class FlatStore extends Store {
-    private final FlatDataConfiguration flatDataConfiguration;
+    private final File directory;
 
-    public FlatStore(FlatDataConfiguration flatDataConfiguration) {
-        this.flatDataConfiguration = flatDataConfiguration;
+    public FlatStore(File directory) {
+        this.directory = directory;
+        directory.mkdirs();
     }
 
     @Override
     public void loadData() {
-        ConfigurationSection saveSection = flatDataConfiguration.getConfiguration().getConfigurationSection("users");
-        if (saveSection == null) return;
+        for (File file : directory.listFiles()) {
+            try (FileInputStream inputStream = new FileInputStream(file)) {
+                String discordId = Long.toString(Long.parseLong(file.getName().substring(0, file.getName().lastIndexOf(".")), 16));
 
-        for (String key : saveSection.getKeys(false)) {
-            ConfigurationSection userSection = saveSection.getConfigurationSection(key);
+                byte[] usernameRaw = new byte[inputStream.read()];
+                inputStream.read(usernameRaw);
+                String username = new String(usernameRaw);
 
-            String userName = userSection.getString("minecraft_player_name");
-            super.userMap.put(userName, new User(
-                    userName,
-                    userSection.getName(),
-                    userSection.getBoolean("has_used_prize")));
+                userMap.put(username, new User(username, discordId, inputStream.read() == 1));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -32,15 +37,18 @@ public class FlatStore extends Store {
     public void saveData() {
         for (User user : userMap.values()) {
             if (!user.needSave()) continue;
-            ConfigurationSection userSection = flatDataConfiguration.getConfiguration().getConfigurationSection("users." + user.getDiscordUserId());
-            if (userSection == null)
-                userSection = flatDataConfiguration.getConfiguration().createSection("users." + user.getDiscordUserId());
-
-            userSection.set("minecraft_player_name", user.getMinecraftPlayerName());
-            userSection.set("has_used_prize", user.hasUnlockedPrize());
-
-            user.save();
+            try (FileOutputStream outputStream = new FileOutputStream(getPlayerSaveFile(user.getDiscordUserId()))) {
+                byte[] usernameBytes = user.getMinecraftPlayerName().getBytes();
+                outputStream.write(usernameBytes.length);
+                outputStream.write(usernameBytes);
+                outputStream.write(user.hasUnlockedPrize() ? 1 : 0);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
-        flatDataConfiguration.saveConfiguration();
+    }
+
+    private File getPlayerSaveFile(String discordId) {
+        return new File(directory, Long.toHexString(Long.parseLong(discordId)) + ".bin");
     }
 }

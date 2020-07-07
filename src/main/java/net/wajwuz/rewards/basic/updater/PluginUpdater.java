@@ -26,9 +26,7 @@ public class PluginUpdater {
     }
 
     public PluginUpdate getUpdate() {
-        try {
-            BufferedReader inputStream = new BufferedReader(new InputStreamReader(new URL(RELEASE_URL).openStream()));
-
+        try (BufferedReader inputStream = new BufferedReader(new InputStreamReader(new URL(RELEASE_URL).openStream()))) {
             return new PluginUpdate(reader.parse(inputStream).getAsJsonObject());
         } catch (Exception ex) {
             ex.printStackTrace();

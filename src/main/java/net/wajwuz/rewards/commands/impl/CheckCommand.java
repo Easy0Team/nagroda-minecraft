@@ -11,7 +11,7 @@ import java.awt.*;
 import java.util.Optional;
 
 public class CheckCommand extends Command {
-    private Store storeData;
+    private final Store storeData;
 
     public CheckCommand(Store storeData) {
         super("check", "sprawdz");

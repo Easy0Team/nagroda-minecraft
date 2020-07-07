@@ -6,18 +6,15 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.wajwuz.rewards.commands.Command;
 import net.wajwuz.rewards.commands.CommandManager;
-import net.wajwuz.rewards.configuration.FlatDataConfiguration;
 import net.wajwuz.rewards.configuration.PluginConfiguration;
 import net.wajwuz.rewards.data.Store;
-import net.wajwuz.rewards.data.impl.FlatStore;
 import net.wajwuz.rewards.data.impl.MySQLStore;
-import org.bukkit.plugin.java.JavaPlugin;
+import net.wajwuz.rewards.data.impl.FlatStore;
 import org.jetbrains.annotations.NotNull;
 
 import javax.security.auth.login.LoginException;
-import java.util.Optional;
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class RewardBot extends ListenerAdapter {
@@ -30,9 +27,7 @@ public class RewardBot extends ListenerAdapter {
         this.pluginConfiguration = rewardPlugin.getPluginConfiguration();
 
         if (pluginConfiguration.saveType.equalsIgnoreCase("flat")) {
-            FlatDataConfiguration dataConfiguration = new FlatDataConfiguration(rewardPlugin);
-            dataConfiguration.loadConfiguration();
-            this.userData = new FlatStore(dataConfiguration);
+            this.userData = new FlatStore(new File(rewardPlugin.getDataFolder(), "data"));
         } else if (pluginConfiguration.saveType.equalsIgnoreCase("mysql")) {
             this.userData = new MySQLStore(rewardPlugin);
         } else {
