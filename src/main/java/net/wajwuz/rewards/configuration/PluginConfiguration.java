@@ -13,21 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PluginConfiguration extends DataConfiguration {
-    public String botToken;
-    public String botPrefix;
-    public String botGameType;
-    public String botGameName;
-    public String botAwardCommand;
-    public String botAwardMessage;
+    public String botToken, botPrefix, botGameType, botGameName, botAwardCommand, botAwardMessage;
     public List<String> botAwardChannels;
-    public EmbedBuilder playerOfflineMessage;
-    public EmbedBuilder playerAwardedMessage;
-    public EmbedBuilder invalidArugmentMessage;
-    public EmbedBuilder playerAlreadyReceivedMessage;
-    public String saveType;
-    public String databaseUrl;
-    public String databaseUser;
-    public String databasePass;
+    public EmbedBuilder playerOfflineMessage, playerAwardedMessage, invalidArugmentMessage, playerAlreadyReceivedMessage;
+    public String saveType, databaseUrl, databaseUser, databasePass;
 
     public PluginConfiguration(Plugin plugin) {
         super(plugin, "config.yml");

@@ -9,10 +9,7 @@ public abstract class Store {
     //ty no nie wiem czy ci pamiec wytrzyma
 
     public User getUser(String playerName, String userId) {
-        if (userMap.containsKey(playerName))
-            return userMap.get(playerName);
-        else
-            return findById(userId).orElse(userMap.computeIfAbsent(playerName, name -> new User(playerName, userId, false)));
+        return Optional.of(userMap.get(playerName)).orElse(findById(userId).orElse(userMap.computeIfAbsent(playerName, name -> new User(playerName, userId, false))));
     }
 
     public Optional<User> getUser(String identifier) {
