@@ -75,9 +75,7 @@ public class RewardBot extends ListenerAdapter {
         if (!messageContent.startsWith(pluginConfiguration.botPrefix)) return;
 
         String[] args = messageContent.substring(pluginConfiguration.botPrefix.length()).split(" ");
-        Optional<Command> command = commandManager.getCommand(args[0]); //args[0] to nazwa komendy btw
-
-        command.ifPresent(value -> value.execute(event, args));
+        commandManager.getCommand(args[0]).ifPresent(value -> value.execute(event, args));
     }
 
     Store getStore() {

@@ -16,10 +16,7 @@ public abstract class Store {
     }
 
     public Optional<User> getUser(String identifier) {
-        if (userMap.containsKey(identifier))
-            return Optional.ofNullable(userMap.get(identifier));
-        else
-            return findById(identifier);
+        return Optional.ofNullable(userMap.get(identifier)).map(Optional::of).orElse(findById(identifier));
     }
 
     private Optional<User> findById(String userId) {
