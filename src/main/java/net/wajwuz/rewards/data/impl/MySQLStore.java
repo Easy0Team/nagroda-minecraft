@@ -12,7 +12,6 @@ public class MySQLStore extends Store {
 
     private Connection databaseConnection;
 
-
     public MySQLStore(RewardPlugin pluginInstance) {
         PluginConfiguration pluginConfiguration = pluginInstance.getPluginConfiguration();
 
@@ -71,6 +70,14 @@ public class MySQLStore extends Store {
             updateStatement.executeBatch();
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void close() {
+        try {
+            databaseConnection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

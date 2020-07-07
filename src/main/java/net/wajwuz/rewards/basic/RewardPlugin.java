@@ -5,6 +5,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.wajwuz.rewards.basic.updater.PluginUpdate;
 import net.wajwuz.rewards.basic.updater.PluginUpdater;
 import net.wajwuz.rewards.configuration.PluginConfiguration;
+import net.wajwuz.rewards.data.impl.MySQLStore;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -40,6 +41,9 @@ public class RewardPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         botInstance.getStore().saveData();
+
+        if(botInstance.getStore() instanceof MySQLStore)
+            ((MySQLStore) botInstance.getStore()).close();
     }
 
     public PluginConfiguration getPluginConfiguration() {
