@@ -5,7 +5,7 @@ Bot w pluginie minecraft, który umożliwia odebranie nagrody z użyciem komendy
 Autorem wtyczki jest https://github.com/wajwuz
 
 ## Pobieranie pluginu ##
-Wtyczkę można pobrać z strony: https://github.com/Easy0Team/nagroda-minecraft/releases
+Wtyczkę można pobrać z strony: https://github.com/NettyTeam/nagroda-minecraft/releases
 
 ## Kontakt ##
 Discord: https://discord.gg/UbecB6v
