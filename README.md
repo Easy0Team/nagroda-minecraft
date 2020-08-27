@@ -8,4 +8,4 @@ Autorem wtyczki jest https://github.com/wajwuz
 Wtyczkę można pobrać z strony: https://github.com/NettyTeam/nagroda-minecraft/releases
 
 ## Kontakt ##
-Discord: https://discord.gg/UbecB6v
+Discord: https://discord.gg/UbecB6v - new link
