@@ -9,3 +9,4 @@ Wtyczkę można pobrać z strony: https://github.com/NettyTeam/nagroda-minecraft
 
 ## Kontakt ##
 Discord: https://discord.gg/UbecB6v - new link
+ test
